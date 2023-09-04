@@ -1,3 +1,4 @@
+#load packages
 library(medulloPackage)
 library(BiocManager)
 options(repos = BiocManager::repositories())
@@ -21,8 +22,10 @@ library(shinysky)
 library(rhandsontable)
 library(bslib)
 library(fresh)
+#custom themes
 themes <- list("Light" = theme_light(),
                "Minimal" = theme_minimal(),"Gray" = theme_gray() , "BLack and white" = theme_bw() , "Line Draw" = theme_linedraw() , "Dark" = theme_dark() , "Classic" = theme_classic() , "Void" = theme_void(), "test" = theme_test())
+#use bootstrap
 library(bslib)
 theme <- bs_theme(
   bg = "#0b3d91", fg = "white", primary = "#FCC780",
@@ -36,6 +39,7 @@ mytheme <- create_theme(
     black = "#FFFFFF"
   )
 )
+#ui component
 ui <- dashboardPage( 
   dashboardHeader(title = "Visual Studio" ),
   dashboardSidebar( sidebarMenu((menuItem("Upload Data", tabName = "Upload_data",fileInput("FileInput", "Upload Count Table" , multiple = TRUE),
@@ -200,7 +204,7 @@ ui <- dashboardPage(
   )
   )
 )
-
+#server component
 server <- function(input, output, session){
   (datasetInput1 <- reactive({
     infile <- input$FileInput
